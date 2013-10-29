@@ -1,4 +1,9 @@
 caronusp
 ========
 
-Projeto de um site de caronas.
+Branch de integração com o facebook.
+
+Participantes
+-------------
+
+aviggiano
