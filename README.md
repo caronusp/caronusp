@@ -1,4 +1,9 @@
-caronusp
+caronUSP
 ========
 
-Projeto de um site de caronas.
+Branch das funções de login, logout e recuperação e alteração de senha.
+
+Participantes
+=============
+
+lucasmpinheiro
