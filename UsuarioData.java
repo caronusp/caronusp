@@ -2,11 +2,10 @@ package classes.data;
 
 import java.sql.*;
 import java.util.*;
-import utils.Transacao;
 
-public class ContatoData {
+public class UsuarioData {
 
-  public void incluir(ContatoDO contato, Transacao tr) throws Exception {
+  public void incluir(UsuarioDO contato) throws Exception {
      Connection con = tr.obterConexao();
      String sql = "insert into Agenda (nome, telefone) values (?, ?)";
      PreparedStatement ps = con.prepareStatement(sql);
