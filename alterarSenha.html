@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CaronUSP - Alterar Senha</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <br>Insira sua senha atual e a nova senha desejada.
+        <form name="formSenha" action="login.html" 
+              onsubmit="return validarLogin()">
+            <table>
+                <tr>
+                <td>Senha Atual</td>
+                <td><input type="password" name="atual" />
+                </tr>      
+                <tr>
+                <td>Nova Senha</td>
+                <td><input type="password" name="nova" />
+                </tr>
+                <tr>
+                <td>Confirmar Nova Senha</td>
+                <td><input type="password" name="novaConf" />
+                </tr>
+            </table>
+            <input type="submit" name="alterar" value="Alterar" />  
+        </form>
+        <p><font id="alerta" color="red"></font></p>
+        <script src="senha.js"></script>
+    </body>
+</html>
