@@ -8,7 +8,7 @@
         Bem-vindo ao CaronUSP. 
         <br>Insira seu e-mail e sua senha para ter acesso ao site.
         <form name="Login" action="index.html" 
-              onsubmit="return validateForm()">
+              onsubmit="return validarLogin()">
             <table>
                 <tr>
                 <td>E-mail</td>
@@ -21,7 +21,7 @@
             </table>
             <input type="submit" name="entrar" value="Entrar" />  
         </form>
-        <p id="alerta"></p>
+        <p><font id="alerta" color="red"></font></p>
         <script src="login.js"></script>
     </body>
 </html>
