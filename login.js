@@ -1,7 +1,9 @@
+importClass(Usuario.java);
+
 function validarLogin() {
     var email=document.forms["Login"]["email"].value;
     var senha=document.forms["Login"]["senha"].value;
-    if (email==null || email=="" || senha==null || senha=="") {
+    if (email===null || email==="" || senha===null || senha==="") {
         document.getElementById("alerta").innerHTML="Campo obrigatório não preenchido.";
         //alert("Campo obrigatÃ³rio nÃ£o preenchido.");
         return false;
@@ -15,7 +17,7 @@ function validarLogin() {
     }
     
     // boolean v = verificaSenha(email, senha); // MÃ©todo de verificaÃ§Ã£o, a ser criado.
-    if (senha=="123") {
+    if (senha==="123") {
         session.setAttribute("user_name", email);
         return true;
     } else {

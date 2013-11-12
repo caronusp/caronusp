@@ -4,7 +4,6 @@ import utils.*;
 import classes.data.*;
 import java.util.*;
 /**
- *
  * @author Vitor Henrique
  */
 public class Usuario {
