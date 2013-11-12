@@ -23,7 +23,7 @@ public class UsuarioDO {
   private String _strProfissao;// VARCHAR(45) NULL,
   private String _strEntidade;// VARCHAR(45) NULL,
   
-   public String getNome() {
+  public String getNome() {
      return _strNome;
   } // getEmail
 
@@ -31,7 +31,7 @@ public class UsuarioDO {
     _strNome = Nome;
   } // setEmail
   
-    public int getId() {
+  public int getId() {
      return _idUsuario;
   } // getId
 
@@ -39,7 +39,7 @@ public class UsuarioDO {
     _idUsuario = id;
   } // setId
   
-      public int getCPF() {
+  public int getCPF() {
      return _numCPF;
   } // getCPF
 
@@ -47,7 +47,7 @@ public class UsuarioDO {
     _numCPF = CPF;
   } // setCPF
   
-        public String getEmail() {
+  public String getEmail() {
      return _strEmail;
   } // getEmail
 
@@ -55,7 +55,7 @@ public class UsuarioDO {
     _strEmail = Email;
   } // setEmail
   
-        public String getSenha() {
+  public String getSenha() {
      return _strSenha;
   } // getSenha
 
@@ -63,7 +63,7 @@ public class UsuarioDO {
     _strSenha = Email;
   } // setSenhaCPF
   
-        public String getCEP() {
+  public String getCEP() {
      return _strCEP;
   } // getCEP
 
@@ -71,7 +71,7 @@ public class UsuarioDO {
     _strCEP = CEP;
   } // setCEP
   
-        public String getRua() {
+  public String getRua() {
      return _strRua;
   } // getRua
 
@@ -79,7 +79,7 @@ public class UsuarioDO {
     _strRua = Rua;
   } // setRua
   
-        public int getNcasa() {
+  public int getNcasa() {
      return _numNumeroCasa;
   } // getNcasa
 
@@ -87,7 +87,7 @@ public class UsuarioDO {
     _numNumeroCasa = Ncasa;
   } // setNcasa
   
-        public String getComplemento() {
+  public String getComplemento() {
      return _strComplemento;
   } // getComplemento
 
@@ -95,7 +95,7 @@ public class UsuarioDO {
     _strComplemento = Complemento;
   } // setComplemento
   
-        public int getTelefone() {
+  public int getTelefone() {
      return _numTelefone;
   } // getTelefone
 
@@ -103,7 +103,7 @@ public class UsuarioDO {
     _numTelefone = Telefone;
   } // setTelefone
   
-        public String getTipo() {
+  public String getTipo() {
      return _strTipo;
   } // getTipo
 
@@ -111,7 +111,7 @@ public class UsuarioDO {
     _strTipo = Tipo;
   } // setId
   
-         public String getSexo() {
+  public String getSexo() {
      return _strSexo;
   } // getSexo
 
@@ -119,7 +119,7 @@ public class UsuarioDO {
     _strSexo = Sexo;
   } // setSexo
   
-         public Date getDatanascimento() {
+  public Date getDatanascimento() {
      return _dateNascimento;
   } // getDatanascimento
 
@@ -127,7 +127,7 @@ public class UsuarioDO {
     _dateNascimento = Datanascimento;
   } // setDatanascimento
   
-         public String getProfissao() {
+  public String getProfissao() {
      return _strProfissao;
   } // getProfissao
 
@@ -135,7 +135,7 @@ public class UsuarioDO {
     _strProfissao = Profissao;
   } // setProfissao
   
-         public String getEntidade() {
+  public String getEntidade() {
      return _strEntidade;
   } // getEntidade
 
