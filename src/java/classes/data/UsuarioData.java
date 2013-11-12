@@ -10,7 +10,6 @@ import utils.Transacao;
  *
  * @author Vitor Henrique
  */
-
 public class UsuarioData {
     
   public void incluir(UsuarioDO usuario, Transacao tr) throws Exception {
@@ -73,11 +72,11 @@ public class UsuarioData {
      int result = ps.executeUpdate();
   } // alterar
 
-  public UsuarioDO buscar(int idobj, Transacao tr) throws Exception {
+  public UsuarioDO buscarPorNome(String nome, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "select * from Usuario where  idUsuario=?";
+     String sql = "select * from Usuario where  strNome=?";
      PreparedStatement ps = con.prepareStatement(sql);
-     ps.setInt(1, idobj);
+     ps.setString(1, nome);
      ResultSet rs = ps.executeQuery();
      rs.next();
      UsuarioDO usuario = new UsuarioDO();
@@ -96,9 +95,32 @@ public class UsuarioData {
      usuario.setEntidade (rs.getString("strEntidade"));
      
      return usuario;
-  } // buscar
+  } // buscarPorNome
 
-
+    public UsuarioDO buscarPorEmail(String Email, Transacao tr) throws Exception {
+     Connection con = tr.obterConexao();
+     String sql = "select * from Usuario where  strEmail=?";
+     PreparedStatement ps = con.prepareStatement(sql);
+     ps.setString(1, Email);
+     ResultSet rs = ps.executeQuery();
+     rs.next();
+     UsuarioDO usuario = new UsuarioDO();
+     usuario.setId (rs.getInt("idUsuario"));
+     usuario.setCPF (rs.getInt("intCPF"));
+     usuario.setEmail (rs.getString("strEmail"));
+     usuario.setSenha (rs.getString("strSenha"));
+     usuario.setRua (rs.getString("strRua"));
+     usuario.setNcasa (rs.getInt("numNumeroCasa"));
+     usuario.setComplemento (rs.getString("strComplemento"));
+     usuario.setTelefone (rs.getInt("intTelefone"));
+     usuario.setTipo (rs.getString("charTipo"));
+     usuario.setSexo (rs.getString("charSexo"));
+     usuario.setDatanascimento (rs.getDate("dateNascimento"));
+     usuario.setProfissao (rs.getString("strProfissão"));
+     usuario.setEntidade (rs.getString("strEntidade"));
+     
+     return usuario;
+  } // buscarPorNome
   //trabalhar nesse daqui:
   
   
