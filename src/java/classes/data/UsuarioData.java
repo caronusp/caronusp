@@ -188,16 +188,16 @@ public class UsuarioData {
         String senhaNova = randomString(8);  
         // E-mail de envio.
         String from = "contato.caronusp@gmail.com";
-        // Assuming you are sending email from localhost
+        // Assumindo que o e-mail é enviado do localhost.
         String host = "localhost";
-        // Get system properties
+        // Adquirindo propriedades do sistema.
         Properties properties = System.getProperties();
-        // Setup mail server
+        // Setup do sistemas de e-mail.
         properties.setProperty("mail.smtp.host", host);
-        // Get the default Session object.
+        // Adquirindo o objeto de Sessão padrão.
         Session session = Session.getDefaultInstance(properties);
         try{
-            // Create a default MimeMessage object.
+            // Cria um objeto MimeMessage padrão.
             MimeMessage message = new MimeMessage(session);
             // Set From: header field of the header.
             message.setFrom(new InternetAddress(from));
