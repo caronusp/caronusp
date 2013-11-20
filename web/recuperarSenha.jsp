@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>CaronUSP - Login</title>
+        <title>CaronUSP - Recuperar Senha</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
         <script type="text/javascript">
@@ -40,7 +40,7 @@
                 alert("Você já está logado. Utilize a função de alterar senha ou efetue logout.");
             </script>
             <%
-            pageContext.forward("index.jsp");
+            pageContext.forward("main.jsp");
         }
         %>
         
@@ -75,8 +75,6 @@
                 String uresponse = request.getParameter("recaptcha_response_field");
                 
                 ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
-                
-                boolean v = false;
                 
                 if (email.length() != 0) {
                     if (reCaptchaResponse.isValid()) {

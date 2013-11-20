@@ -12,11 +12,11 @@
     
     String nome = (String)session.getAttribute("user_name");
 %>
-    Bom dia <%= nome %> !!
+    Bom dia <%= nome %>!!
 
-  <li><a href="./insert.jsp">Inserir Contato</a>
-  <li><a href="./update.jsp">Editar Contato</a>
-  <li><a href="./remove.jsp">Remover Contato</a>
+  <li><a href="./login.jsp">Login</a>
+  <li><a href="./recuperarSenha.jsp">Recuperar Senha</a>
+  <li><a href="./alterarSenha.jsp">Alterar Senha</a>
   <li><a href="./search.jsp">Pesquisar Contato</a>
     </body>
 </html>
