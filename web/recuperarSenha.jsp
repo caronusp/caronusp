@@ -12,30 +12,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
         <script type="text/javascript">
-    
-            function checkCaptcha() {
-                
-                <% String remoteAddr = request.getRemoteAddr();
-                ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
-                reCaptcha.setPrivateKey("6Lf7fOoSAAAAAGxU4i10XBvCqbTST7tKGgzBQhmd");
-                
-                String challenge = request.getParameter("recaptcha_challenge_field");
-                String uresponse = request.getParameter("recaptcha_response_field");
-                
-                ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
-                if (!reCaptchaResponse.isValid()) out.print("Foi!");
-                else out.print("Foi!2");
-                
-                if (reCaptchaResponse.isValid()) {
-                    %> document.getElementById("alerta").innerHTML="Correto!";
-                    return true; <%
-                } else {
-                    %> document.getElementById("alerta").innerHTML="Errado!"; 
-                    return false; <%
-                }
-                %>
-            }
             
+            var RecaptchaOptions = {
+                lang : 'br',
+            };
+            
+            var RecaptchaOptions = {
+                theme : 'white'
+            };
+
+           
         </script>
     
     </head>
@@ -51,14 +37,16 @@
         if ( session.getAttribute("user_name") != null) {
             %>
             <script type="text/javascript">
-            alert("Você já está logado. Utilize a função de alterar senha ou efetue logout.");
+                alert("Você já está logado. Utilize a função de alterar senha ou efetue logout.");
             </script>
             <%
             pageContext.forward("index.jsp");
         }
         %>
+        
+        
         Insira seu e-mail e preencha o Captcha para receber uma mensagem de recuperação de senha.
-        <form name="formRec" onsubmit="return checkCaptcha()">
+        <form name="formRec">
             <table>
                 <tr>
                 <td>E-mail</td>
@@ -71,9 +59,39 @@
                 ReCaptcha c = ReCaptchaFactory.newReCaptcha("6Lf7fOoSAAAAAF-SgsF1BAeqFjzPWnHxTMRW5xuN", "6Lf7fOoSAAAAAGxU4i10XBvCqbTST7tKGgzBQhmd", false);
                 out.print(c.createRecaptchaHtml(null, null));
             %>
-            <input type="submit" name="recuperar" value="Recuperar" />  
+            <input type="submit" name="recuperar" value="Recuperar" />
+            <input type="hidden" name="campo_controle" />
         </form>
-        <p><font id="alerta" color="red">oi</font></p>
+        
+        <%
+            if ( request.getParameter("campo_controle") != null ) {
+                // Processa o pedido de recuperação de e-mail.
+                String email = request.getParameter("email");
+                String remoteAddr = request.getRemoteAddr();
+                ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+                reCaptcha.setPrivateKey("6Lf7fOoSAAAAAGxU4i10XBvCqbTST7tKGgzBQhmd");
+                
+                String challenge = request.getParameter("recaptcha_challenge_field");
+                String uresponse = request.getParameter("recaptcha_response_field");
+                
+                ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
+                
+                boolean v = false;
+                
+                if (email.length() != 0) {
+                    if (reCaptchaResponse.isValid()) {
+                        Usuario user = new Usuario();
+                        //if(user.recuperarSenha(email)) {
+                        if(email.equals("123")) {
+                            out.print("<script type='text/javascript'> alert('Uma mensagem contendo a nova senha gerada pelo sistema foi enviada para seu endereço de e-mail.')");      
+                            out.print("\nwindow.location = 'main.jsp'</script>");
+                        }
+                        else out.print("<font id='alerta' color='red'>Endereço de e-mail inválido.</font>");
+                    } else out.print("<font id='alerta' color='red'>Erro no preenchimento do reCaptcha.</font>");
+                } else out.print("<font id='alerta' color='red'>Insira um endereço de e-mail.</font>");
+                
+            }
+        %>
         
     </body>
 </html>
