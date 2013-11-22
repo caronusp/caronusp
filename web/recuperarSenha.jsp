@@ -10,7 +10,6 @@
     <head>
         <title>CaronUSP - Recuperar Senha</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
         <script type="text/javascript">
             
             var RecaptchaOptions = {
@@ -20,10 +19,8 @@
             var RecaptchaOptions = {
                 theme : 'white'
             };
-
            
         </script>
-    
     </head>
     <body>
         <%@ page import="classes.transacoes.Usuario" %>
@@ -38,31 +35,38 @@
             %>
             <script type="text/javascript">
                 alert("Você já está logado. Utilize a função de alterar senha ou efetue logout.");
+                window.location = "main.jsp";
             </script>
             <%
-            pageContext.forward("main.jsp");
         }
         %>
         
         
-        Insira seu e-mail e preencha o Captcha para receber uma mensagem de recuperação de senha.
+        <p align="center">Insira seu e-mail e preencha o Captcha para receber 
+                          uma mensagem de recuperação de senha. </p>
         <form name="formRec">
-            <table>
+            <table align="center">
                 <tr>
-                <td>E-mail</td>
-                <td><input type="text" name="email" />
+                    <td align="right">E-mail</td>
+                    <td><input type="text" name="email" />
+                </tr>
+                <tr>
+                    <td align="center" colspan="2">
+                        <%
+                        ReCaptcha c = ReCaptchaFactory.newReCaptcha("6Lf7fOoSAAAAAF-SgsF1BAeqFjzPWnHxTMRW5xuN", "6Lf7fOoSAAAAAGxU4i10XBvCqbTST7tKGgzBQhmd", false);
+                        out.print(c.createRecaptchaHtml(null, null));
+                        %>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" colspan="2">
+                        <input type="submit" name="recuperar" value="Recuperar" />
+                        <input type="hidden" name="campo_controle" />
+                    </td>
                 </tr>
                 <br>
-            </table>
-            <p id="recaptcha"></p>
-            <%
-                ReCaptcha c = ReCaptchaFactory.newReCaptcha("6Lf7fOoSAAAAAF-SgsF1BAeqFjzPWnHxTMRW5xuN", "6Lf7fOoSAAAAAGxU4i10XBvCqbTST7tKGgzBQhmd", false);
-                out.print(c.createRecaptchaHtml(null, null));
-            %>
-            <input type="submit" name="recuperar" value="Recuperar" />
-            <input type="hidden" name="campo_controle" />
+            </table>         
         </form>
-        
         <%
             if ( request.getParameter("campo_controle") != null ) {
                 // Processa o pedido de recuperação de e-mail.
@@ -89,7 +93,6 @@
                 } else out.print("<font id='alerta' color='red'>Insira um endereço de e-mail.</font>");
                 
             }
-        %>
-        
+        %>   
     </body>
 </html>
