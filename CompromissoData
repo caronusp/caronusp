@@ -1,0 +1,49 @@
+package data;
+
+import java.sql.*;
+import java.util.*;
+import utils.Transacao;
+
+public class CompromissoData {
+
+  public void incluir(CompromissoDO compromisso, Transacao tr) throws Exception {
+     Connection con = tr.obterConexao();
+     String sql = "insert into Agenda (nome, telefone) values (?, ?)";
+     PreparedStatement ps = con.prepareStatement(sql);
+     ps.setInt(1, compromisso.getIdCarona());
+     ps.setInt(2, compromisso.getIdCarro());
+     int result = ps.executeUpdate();
+  }
+
+  public void excluir(CompromissoDO compromisso, Transacao tr) throws Exception {
+     excluir(compromisso.getIdAnuncio(), tr);
+  } // excluir
+
+  public void excluir (int idobj, Transacao tr) throws Exception {
+  } // excluir 
+
+  public void atualizar(CompromissoDO compromisso, Transacao tr) throws Exception {
+     Connection con = tr.obterConexao();
+     String sql = "update Agenda set nome=?, telefone=? where id=?";
+     PreparedStatement ps = con.prepareStatement(sql);
+     ps.setInt(1, compromisso.getIdCarro());
+     ps.setInt(2, compromisso.getIdCarona());
+	 ps.setInt(3, compromisso.getIdAnuncio());
+     int result = ps.executeUpdate();
+  } // atualizar
+
+  public CompromissoDO buscar(int idobj, Transacao tr) throws Exception {
+     Connection con = tr.obterConexao();
+     String sql = "select * from Agenda where  id=?";
+     PreparedStatement ps = con.prepareStatement(sql);
+     ps.setInt(1, idobj);
+     ResultSet rs = ps.executeQuery();
+     rs.next();
+     CompromissoDO compromisso = new CompromissooDO();
+     compromisso.setIdAnuncio (rs.getInt("id"));
+     compromisso.setIdCarro (rs.getInt("carro"));
+     compromisso.setIdCarona (rs.getInt("carona"));
+     return compromisso;
+  } // buscar
+
+} // ContatoData
