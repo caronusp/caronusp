@@ -1,0 +1,33 @@
+package data;
+
+public class CompromissoDO {
+  private int _idcarona;
+  private int _idcarro;
+  private int _idanuncio;
+
+  public int getIdAnuncio() {
+     return _idanuncio;
+  } 
+
+  public void setIdAnuncio(int idanuncio) {
+    _idanuncio = idanuncio;
+  }
+
+  public int getIdCarona() {
+    return _idcarona;
+  }
+
+  public void setIdCarona(int idcarona) {
+    _idcarona = idcarona;
+  }
+
+  public int getIdCarro() {
+    return _idcarro;
+  }
+
+  public void setIdCarro(int idcarro) {
+    _idcarro = idcarro;
+  }
+
+
+}
