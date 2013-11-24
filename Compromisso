@@ -1,0 +1,85 @@
+package transacoes;
+
+import utils.*;
+import data.*;
+import java.util.*;
+
+public class Compromisso {
+
+  public boolean incluir (CompromissoDO compromisso) throws Exception{
+
+     // validacao das regras de negocio
+     if ( (isEmpty(compromisso.getIdCarro())) || ( isEmpty(compromisso.getIdCarona())) ) {
+       return false;
+     }
+
+     // efetuando a transacao
+     Transacao tr = new Transacao();
+     try {
+
+       tr.begin();
+         CompromissoData cdata = new CompromissoData();
+         cdata.incluir(compromisso, tr);
+       tr.commit();
+       return true;
+       
+     } catch(Exception e) {
+         tr.rollback();
+         System.out.println("erro ao incluir " + compromisso.getIdAnuncio());
+         e.printStackTrace();
+     }
+     return false;
+  } // incluir
+
+  public boolean atualizar(CompromissoDO compromisso) throws Exception {
+     Transacao tr = new Transacao();
+	 try{
+	   // inserir validacoes de regras de negocio
+	   tr.begin();
+  	     CompromissoData cdata = new CompromissoData();
+	     cdata.atualizar(compromisso, tr);
+	   tr.commit();
+	   return true;
+	 } catch (Exception e) {
+	   tr.rollback();
+	   System.out.println("erro ao atualizar" + compromisso.getIdAnuncio());
+	   e.printStackTrace();
+	 }
+	 return false;
+  } // atualizar
+
+  public CompromissoDO buscar(int idobj) throws Exception{
+     Transacao tr = new Transacao();
+	 try{
+	   tr.beginReadOnly();
+  	     CompromissoData cdata = new CompromissoData();
+	     CompromissoDO c = cdata.buscar(idobj, tr);
+	   tr.commit();
+	   return c;
+	 } catch (Exception e) {
+	   tr.rollback();
+	   System.out.println("erro ao buscar" + idobj);
+	   e.printStackTrace();
+	 }
+	 return null;
+  } // buscar
+
+  private boolean isEmpty(int s) {
+     if (null == s)
+       return true;
+     if (s.length() == 0)
+       return true;
+     return false;
+  }
+
+  public static void main(String[] args) {
+      Compromisso c = new Compromisso();
+      CompromissoDO compromisso = new CompromissoDO();
+      try {
+	    compromisso = c.buscar(6);
+		System.out.println(compromisso.getIdAnuncio());
+      } catch(Exception e) {
+          e.printStackTrace();
+      }
+  } // main
+} // Compromisso
