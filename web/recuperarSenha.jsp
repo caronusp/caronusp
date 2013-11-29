@@ -83,8 +83,7 @@
                 if (email.length() != 0) {
                     if (reCaptchaResponse.isValid()) {
                         Usuario user = new Usuario();
-                        //if(user.recuperarSenha(email)) {
-                        if(email.equals("123")) {
+                        if(user.recuperarSenha(email)) {
                             out.print("<script type='text/javascript'> alert('Uma mensagem contendo a nova senha gerada pelo sistema foi enviada para seu endereço de e-mail.')");      
                             out.print("\nwindow.location = 'main.jsp'</script>");
                         }

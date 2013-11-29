@@ -1,14 +1,17 @@
 package classes.transacoes;
 
-import utils.*;
+import classes.utils.*;
 import classes.data.*;
 import java.util.Properties;
 import java.util.Random;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import javax.mail.*;
+//import javax.mail.Message;
+//import javax.mail.Session;
+//import javax.mail.Transport;
+import javax.mail.internet.*;
+//import javax.mail.internet.InternetAddress;
+//import javax.mail.internet.MimeMessage;
+import javax.activation.*;
 /**
  *
  * @author Vitor Henrique
@@ -243,8 +246,7 @@ public class Usuario {
         
         try {
             tr.begin();
-            UsuarioData udata = new UsuarioData();
-            UsuarioDO u = udata.buscarPorEmail(email, tr);
+            UsuarioDO u = buscarPorEmail(email);
             if ( senha.equals(u.getSenha()) ) v = true;
             tr.commit();
         } catch (Exception e) {
@@ -287,18 +289,12 @@ public class Usuario {
                 // Assunto do e-mail.
                 message.setSubject("Recuperação de Senha");
                 // Corpo da mensagem do e-mail.
-                message.setText("Caro(a) usuário,\n\n"
-                        + "Foi requisitado o envio de nova senha para o usuário cadastrado "
-                        + "no site CaroNUSP com o seu endereço de e-mail, a qual encontra-se a seguir.\n\n"
-                        + "Nova senha: " + senhaNova + "\n\n"
-                        + "Solicita-se, por questões de segurança, que a nova senha seja alterada o quanto antes. "
-                        + "Isso pode ser feito através da opção Alterar Senha disponível em nosso site após o Login.\n\n"
-                        + "Atenciosamente,\n"
-                        + "Equipe CaroNUSP");
+                message.setText("Caro(a) usuário,\n\nFoi requisitado o envio de nova senha para o usuário cadastrado no site CaroNUSP com o seu endereço de e-mail, a qual encontra-se a seguir.\n\nNova senha: " + senhaNova + "\n\nSolicita-se, por questões de segurança, que a nova senha seja alterada o quanto antes. Isso pode ser feito através da opção Alterar Senha disponível em nosso site após o Login.\n\nAtenciosamente,\nEquipe CaroNUSP");
                 // Enviar mensagem.
                 Transport.send(message);
                 // Alteração da senha do usuário.
                 u.setSenha(senhaNova);
+                udata.alterarSenha(u, tr);
                 v = true;
             }
             tr.commit();
@@ -322,6 +318,7 @@ public class Usuario {
             UsuarioDO u = udata.buscarPorEmail(email, tr);
             if ( senhaAntiga.equals(u.getSenha()) ) {
                 u.setSenha(senhaNova);
+                udata.alterarSenha(u, tr);
                 v =  true;
             }
             tr.commit();

@@ -92,8 +92,8 @@
                           && (confSenhaNova.length() > 0) ) {
                         if ( confSenhaNova.equals(senhaNova) ) {
                             if (reCaptchaResponse.isValid()) {
-                                //if ( user.alterarSenha( email, senhaAtual, senhaNova ) ) {
-                                if ( senhaAtual.equals("123") ) {
+                                if ( user.alterarSenha( email, senhaAtual, senhaNova ) ) {
+                                //if ( senhaAtual.equals("123") ) {
                                     out.print("<script type='text/javascript'> alert('Senha alterada com sucesso.')");      
                                     out.print("\nwindow.location = 'main.jsp'</script>");
                                 } else { %> Senha inválida! <% }

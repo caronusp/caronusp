@@ -3,7 +3,7 @@ package classes.data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import utils.Transacao;
+import classes.utils.Transacao;
 
 /**
  *
@@ -48,7 +48,7 @@ public class UsuarioData {
 
   public void Alterar(UsuarioDO usuario, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "update Usuario set numCPF=? strEmail=? strSenha=? strCEP=? strRua=? numNumeroCasa=? strComplemento=? numTelefone=? charTipo=? charSexo=? dateNascimento=? strProfissao=? strEntidade=? strNome= ? where idUsuario=?";
+     String sql = "update Usuario set numCPF=?, strEmail=?, strSenha=?, strCEP=?, strRua=?, numNumeroCasa=?, strComplemento=?, numTelefone=?, charTipo=?, charSexo=?, dateNascimento=?, strProfissao=?, strEntidade=?, strNome= ? where idUsuario=?";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setInt(1, usuario.getCPF());
      ps.setString(2, usuario.getEmail());
@@ -65,6 +65,15 @@ public class UsuarioData {
      ps.setString(13, usuario.getEntidade());
      ps.setString(14, usuario.getNome());
      ps.setInt(15, usuario.getId());
+     int result = ps.executeUpdate();
+  } // alterar
+  
+  public void alterarSenha(UsuarioDO usuario, Transacao tr) throws Exception {
+     Connection con = tr.obterConexao();
+     String sql = "update Usuario set strSenha=? where idUsuario=?";
+     PreparedStatement ps = con.prepareStatement(sql);
+     ps.setString(1, usuario.getSenha());
+     ps.setInt(2, usuario.getId());
      int result = ps.executeUpdate();
   } // alterar
 
@@ -102,17 +111,17 @@ public class UsuarioData {
         rs.next();
         UsuarioDO usuario = new UsuarioDO();
         usuario.setId (rs.getInt("idUsuario"));
-        usuario.setCPF (rs.getInt("intCPF"));
+        usuario.setCPF (rs.getInt("numCPF"));
         usuario.setEmail (rs.getString("strEmail"));
         usuario.setSenha (rs.getString("strSenha"));
         usuario.setRua (rs.getString("strRua"));
         usuario.setNcasa (rs.getInt("numNumeroCasa"));
         usuario.setComplemento (rs.getString("strComplemento"));
-        usuario.setTelefone (rs.getInt("intTelefone"));
+        usuario.setTelefone (rs.getInt("numTelefone"));
         usuario.setTipo (rs.getString("charTipo"));
         usuario.setSexo (rs.getString("charSexo"));
         usuario.setDatanascimento (rs.getDate("dateNascimento"));
-        usuario.setProfissao (rs.getString("strProfissão"));
+        usuario.setProfissao (rs.getString("strProfissao"));
         usuario.setEntidade (rs.getString("strEntidade"));
 
         return usuario;

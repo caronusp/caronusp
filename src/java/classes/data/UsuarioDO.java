@@ -59,9 +59,9 @@ public class UsuarioDO {
      return _strSenha;
   } // getSenha
 
-  public void setSenha(String Email) {
-    _strSenha = Email;
-  } // setSenhaCPF
+  public void setSenha(String senha) {
+    _strSenha = senha;
+  } // setSenha
   
   public String getCEP() {
      return _strCEP;
