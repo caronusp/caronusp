@@ -46,15 +46,15 @@
                 </tr>
                 <tr>
                     <td align="right">Senha Atual</td>
-                    <td><input type="password" name="senhaAtual" />
+                    <td><input type="password" name="senhaAtual" required placeholder="Senha Atual"/>
                 </tr>      
                 <tr>
                     <td align="right">Nova Senha</td>
-                    <td><input type="password" name="senhaNova" />
+                    <td><input type="password" name="senhaNova" required placeholder="Nova Senha"/>
                 </tr>
                 <tr>
                     <td align="right">Confirmação da Nova Senha</td>
-                    <td><input type="password" name="confSenhaNova" />
+                    <td><input type="password" name="confSenhaNova" required placeholder="Confirmação da Nova Senha"/>
                 </tr>
                 <tr>
                     <td align="center" colspan="2">

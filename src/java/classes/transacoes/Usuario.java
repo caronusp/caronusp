@@ -2,16 +2,12 @@ package classes.transacoes;
 
 import classes.utils.*;
 import classes.data.*;
+import com.sun.mail.smtp.SMTPTransport;
+import java.security.Security;
 import java.util.Properties;
 import java.util.Random;
 import javax.mail.*;
-//import javax.mail.Message;
-//import javax.mail.Session;
-//import javax.mail.Transport;
 import javax.mail.internet.*;
-//import javax.mail.internet.InternetAddress;
-//import javax.mail.internet.MimeMessage;
-import javax.activation.*;
 /**
  *
  * @author Vitor Henrique
@@ -276,10 +272,19 @@ public class Usuario {
                 String host = "localhost";
                 // Adquirindo propriedades do sistema.
                 Properties properties = System.getProperties();
-                // Setup do sistemas de e-mail.
-                properties.setProperty("mail.smtp.host", host);
+                // Setup do sistema de e-mail.
+                Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+                final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+                properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+                properties.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+                properties.setProperty("mail.smtp.socketFactory.fallback", "false");
+                properties.setProperty("mail.smtp.port", "465");
+                properties.setProperty("mail.smtp.socketFactory.port", "465");
+                properties.setProperty("mail.smtps.auth", "true");
+                properties.setProperty("mail.user", "contato.caronusp@gmail.com");
+                properties.setProperty("mail.password", "PMRcaronusp");
                 // Adquirindo o objeto de Sessão padrão.
-                Session session = Session.getDefaultInstance(properties);
+                Session session = Session.getInstance(properties, null);
                 // Cria um objeto MimeMessage padrão.
                 MimeMessage message = new MimeMessage(session);
                 // Set From: header field of the header.
@@ -291,7 +296,11 @@ public class Usuario {
                 // Corpo da mensagem do e-mail.
                 message.setText("Caro(a) usuário,\n\nFoi requisitado o envio de nova senha para o usuário cadastrado no site CaroNUSP com o seu endereço de e-mail, a qual encontra-se a seguir.\n\nNova senha: " + senhaNova + "\n\nSolicita-se, por questões de segurança, que a nova senha seja alterada o quanto antes. Isso pode ser feito através da opção Alterar Senha disponível em nosso site após o Login.\n\nAtenciosamente,\nEquipe CaroNUSP");
                 // Enviar mensagem.
-                Transport.send(message);
+                SMTPTransport t = (SMTPTransport)session.getTransport("smtps");
+                t.connect("smtp.gmail.com", "contato.caronusp", "PMRcaronusp");
+                t.sendMessage(message, message.getAllRecipients());
+                t.close();
+                //Transport.send(message);
                 // Alteração da senha do usuário.
                 u.setSenha(senhaNova);
                 udata.alterarSenha(u, tr);

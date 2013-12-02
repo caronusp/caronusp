@@ -7,7 +7,7 @@
 <%
     // VERIFICACAO MANUAL DO LOGIN
     if ( session.getAttribute("user_name") == null) {
-       pageContext.forward("index.jsp");
+       pageContext.forward("login.jsp");
     }
     
     String nome = (String)session.getAttribute("user_name");

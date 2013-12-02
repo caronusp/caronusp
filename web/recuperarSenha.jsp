@@ -48,7 +48,7 @@
             <table align="center">
                 <tr>
                     <td align="right">E-mail</td>
-                    <td><input type="text" name="email" />
+                    <td><input type="text" name="email" required placeholder="E-mail"/>
                 </tr>
                 <tr>
                     <td align="center" colspan="2">
