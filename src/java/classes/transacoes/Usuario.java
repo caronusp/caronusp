@@ -295,7 +295,7 @@ public class Usuario {
                 message.setSubject("Recuperação de Senha");
                 // Corpo da mensagem do e-mail.
                 String nome = (String)u.getNome();
-                message.setText("Caro(a) " + nome + ",\n\nFoi requisitado o envio de nova senha para o usuário cadastrado no site CaroNUSP com o seu endereço de e-mail, a qual encontra-se a seguir.\n\nNova senha: " + senhaNova + "\n\nSolicita-se, por questões de segurança, que a nova senha seja alterada o quanto antes. Isso pode ser feito através da opção Alterar Senha disponível em nosso site após o Login.\n\nAtenciosamente,\nEquipe CaroNUSP");
+                message.setText("Caro(a) " + nome + ",\n\nFoi requisitado o envio de nova senha para o usuário cadastrado no site CaronUSP com o seu endereço de e-mail, a qual encontra-se a seguir.\n\nNova senha: " + senhaNova + "\n\nSolicita-se, por questões de segurança, que a nova senha seja alterada o quanto antes. Isso pode ser feito através da opção Alterar Senha disponível em nosso site após o Login.\n\nAtenciosamente,\nEquipe CaronUSP");
                 // Enviar mensagem.
                 SMTPTransport t = (SMTPTransport)session.getTransport("smtps");
                 t.connect("smtp.gmail.com", "contato.caronusp", "PMRcaronusp");
@@ -334,7 +334,7 @@ public class Usuario {
             tr.commit();
         } catch (Exception e) {
             tr.rollback();
-            System.out.println("Não foi possível recuperar a senha.");
+            System.out.println("Não foi possível alterar a senha.");
             e.printStackTrace();
         }
         return v;
