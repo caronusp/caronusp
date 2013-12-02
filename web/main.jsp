@@ -4,13 +4,16 @@
         <title>HttpSessionDemo - Pagina Principal</title>
     </head>
     <body>
+        <%@ page import="classes.transacoes.Usuario" %>
+        <%@ page import="classes.data.UsuarioDO" %>
 <%
     // VERIFICACAO MANUAL DO LOGIN
     if ( session.getAttribute("user_name") == null) {
        pageContext.forward("login.jsp");
     }
-    
-    String nome = (String)session.getAttribute("user_name");
+    Usuario u = new Usuario();
+    UsuarioDO udo = u.buscarPorEmail((String)session.getAttribute("user_name"));
+    String nome = udo.getNome();
 %>
     Bom dia <%= nome %>!!
 

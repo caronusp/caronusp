@@ -269,7 +269,7 @@ public class Usuario {
                 // E-mail de envio.
                 String from = "contato.caronusp@gmail.com";
                 // Assumindo que o e-mail é enviado do localhost.
-                String host = "localhost";
+                //String host = "localhost";
                 // Adquirindo propriedades do sistema.
                 Properties properties = System.getProperties();
                 // Setup do sistema de e-mail.
@@ -294,7 +294,8 @@ public class Usuario {
                 // Assunto do e-mail.
                 message.setSubject("Recuperação de Senha");
                 // Corpo da mensagem do e-mail.
-                message.setText("Caro(a) usuário(a),\n\nFoi requisitado o envio de nova senha para o usuário cadastrado no site CaroNUSP com o seu endereço de e-mail, a qual encontra-se a seguir.\n\nNova senha: " + senhaNova + "\n\nSolicita-se, por questões de segurança, que a nova senha seja alterada o quanto antes. Isso pode ser feito através da opção Alterar Senha disponível em nosso site após o Login.\n\nAtenciosamente,\nEquipe CaroNUSP");
+                String nome = (String)u.getNome();
+                message.setText("Caro(a) " + nome + ",\n\nFoi requisitado o envio de nova senha para o usuário cadastrado no site CaroNUSP com o seu endereço de e-mail, a qual encontra-se a seguir.\n\nNova senha: " + senhaNova + "\n\nSolicita-se, por questões de segurança, que a nova senha seja alterada o quanto antes. Isso pode ser feito através da opção Alterar Senha disponível em nosso site após o Login.\n\nAtenciosamente,\nEquipe CaroNUSP");
                 // Enviar mensagem.
                 SMTPTransport t = (SMTPTransport)session.getTransport("smtps");
                 t.connect("smtp.gmail.com", "contato.caronusp", "PMRcaronusp");

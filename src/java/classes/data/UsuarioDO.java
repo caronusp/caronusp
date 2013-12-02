@@ -25,11 +25,11 @@ public class UsuarioDO {
   
   public String getNome() {
      return _strNome;
-  } // getEmail
+  } // getNome
 
   public void setNome(String Nome) {
     _strNome = Nome;
-  } // setEmail
+  } // setNome
   
   public int getId() {
      return _idUsuario;

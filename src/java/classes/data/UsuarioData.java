@@ -13,7 +13,7 @@ public class UsuarioData {
     
   public void incluir(UsuarioDO usuario, Transacao tr) throws Exception {
      Connection con = tr.obterConexao();
-     String sql = "insert into Usuario (strnome, numCPF ,strEmail, strSenha ,strCEP, strRua, numNumeroCasa, strComplemento, numTelefone, charTipo, charSexo, dateNascimento, strProfissao, strEntidade) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+     String sql = "insert into Usuario (strNome, numCPF, strEmail, strSenha ,strCEP, strRua, numNumeroCasa, strComplemento, numTelefone, charTipo, charSexo, dateNascimento, strProfissao, strEntidade) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
      PreparedStatement ps = con.prepareStatement(sql);
      ps.setString(1, usuario.getNome());
      ps.setInt(2, usuario.getCPF());
@@ -86,6 +86,7 @@ public class UsuarioData {
      rs.next();
      UsuarioDO usuario = new UsuarioDO();
      usuario.setId (rs.getInt("idUsuario"));
+     usuario.setNome (rs.getString("strNome"));
      usuario.setCPF (rs.getInt("intCPF"));
      usuario.setEmail (rs.getString("strEmail"));
      usuario.setSenha (rs.getString("strSenha"));
@@ -111,6 +112,7 @@ public class UsuarioData {
         rs.next();
         UsuarioDO usuario = new UsuarioDO();
         usuario.setId (rs.getInt("idUsuario"));
+        usuario.setNome (rs.getString("strNome"));
         usuario.setCPF (rs.getInt("numCPF"));
         usuario.setEmail (rs.getString("strEmail"));
         usuario.setSenha (rs.getString("strSenha"));
